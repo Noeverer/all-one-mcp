@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专属工具集 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>大模型助手</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="profile.html" class="nav-link">个人中心</a>
+                <a href="knowledge.html" class="nav-link">知识记忆</a>
+                <a href="preferences.html" class="nav-link">检索偏好</a>
+                <a href="userinfo.html" class="nav-link">个人信息</a>
+                <a href="tools.html" class="nav-link active">工具集</a>
+                <button id="theme-toggle" class="theme-toggle">切换主题</button>
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <section class="tools-section">
+                <div class="section-header">
+                    <h2>专属工具集</h2>
+                    <button id="add-tool-btn" class="btn btn-primary">添加工具</button>
+                </div>
+
+                <div class="tools-description">
+                    <p>管理您的专属工具集，通过前端隔离技术保障数据安全</p>
+                </div>
+
+                <div class="tools-grid" id="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>代码格式化工具</h3>
+                            <div class="tool-status active">启用</div>
+                        </div>
+                        <div class="tool-content">
+                            <p>自动格式化代码，提升代码可读性</p>
+                            <div class="tool-isolation">
+                                <span class="isolation-status isolated">已隔离</span>
+                            </div>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="action-btn toggle-btn" data-id="1">禁用</button>
+                            <button class="action-btn edit-btn" data-id="1">编辑</button>
+                            <button class="action-btn delete-btn" data-id="1">删除</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3>文档生成器</h3>
+                            <div class="tool-status inactive">禁用</div>
+                        </div>
+                        <div class="tool-content">
+                            <p>根据代码自动生成文档</p>
+                            <div class="tool-isolation">
+                                <span class="isolation-status isolated">已隔离</span>
+                            </div>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="action-btn toggle-btn" data-id="2">启用</button>
+                            <button class="action-btn edit-btn" data-id="2">编辑</button>
+                            <button class="action-btn delete-btn" data-id="2">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 添加/编辑工具的模态框 -->
+        <div id="tool-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="tool-modal-title">添加工具</h3>
+                <form id="tool-form">
+                    <div class="input-group">
+                        <label for="tool-name">工具名称</label>
+                        <input type="text" id="tool-name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-url">工具URL</label>
+                        <input type="url" id="tool-url" name="url" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-description">描述</label>
+                        <textarea id="tool-description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="tool-isolation">隔离设置</label>
+                        <select id="tool-isolation" name="isolation">
+                            <option value="iframe">iframe沙箱</option>
+                            <option value="local">本地存储分区</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/tools.js"></script>
+</body>
+</html>

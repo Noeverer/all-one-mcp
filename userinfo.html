@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息管理 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>大模型助手</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="profile.html" class="nav-link">个人中心</a>
+                <a href="knowledge.html" class="nav-link">知识记忆</a>
+                <a href="preferences.html" class="nav-link">检索偏好</a>
+                <a href="userinfo.html" class="nav-link active">个人信息</a>
+                <a href="tools.html" class="nav-link">工具集</a>
+                <button id="theme-toggle" class="theme-toggle">切换主题</button>
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <section class="userinfo-section">
+                <div class="section-header">
+                    <h2>个人信息管理</h2>
+                </div>
+
+                <div class="userinfo-content">
+                    <div class="userinfo-form">
+                        <h3>基本信息</h3>
+                        <form id="profile-form">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="user-nickname">昵称</label>
+                                    <input type="text" id="user-nickname" name="nickname" value="用户昵称">
+                                </div>
+                                <div class="input-group">
+                                    <label for="user-email">邮箱</label>
+                                    <input type="email" id="user-email" name="email" value="user@example.com" readonly>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="user-bio">个人简介</label>
+                                <textarea id="user-bio" name="bio" rows="3">这是一个个人简介示例</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">保存信息</button>
+                        </form>
+                    </div>
+
+                    <div class="file-management">
+                        <h3>文件管理</h3>
+                        <div class="upload-section">
+                            <div class="file-upload-area" id="file-upload-area">
+                                <p>拖拽文件到此处或点击选择文件</p>
+                                <input type="file" id="file-input" multiple>
+                                <button class="btn btn-secondary" id="browse-files">选择文件</button>
+                            </div>
+                            <div class="upload-progress" id="upload-progress" style="display: none;">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                                <span id="progress-text">上传中...</span>
+                            </div>
+                        </div>
+
+                        <div class="file-list" id="file-list">
+                            <div class="file-item">
+                                <div class="file-icon">📄</div>
+                                <div class="file-info">
+                                    <h4>example.pdf</h4>
+                                    <p>2.4 MB • 2023-12-25</p>
+                                </div>
+                                <div class="file-actions">
+                                    <button class="action-btn preview-btn">预览</button>
+                                    <button class="action-btn download-btn">下载</button>
+                                    <button class="action-btn delete-btn">删除</button>
+                                </div>
+                            </div>
+                            <div class="file-item">
+                                <div class="file-icon">📊</div>
+                                <div class="file-info">
+                                    <h4>data.xlsx</h4>
+                                    <p>1.8 MB • 2023-12-24</p>
+                                </div>
+                                <div class="file-actions">
+                                    <button class="action-btn preview-btn">预览</button>
+                                    <button class="action-btn download-btn">下载</button>
+                                    <button class="action-btn delete-btn">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 文件预览模态框 -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close-modal">&times;</span>
+            <h3 id="preview-title">文件预览</h3>
+            <div class="preview-content" id="preview-content">
+                <!-- 预览内容将在这里显示 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/userinfo.js"></script>
+</body>
+</html>
