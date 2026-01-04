@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>大模型助手</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="profile.html" class="nav-link active">个人中心</a>
+                <a href="knowledge.html" class="nav-link">知识记忆</a>
+                <a href="preferences.html" class="nav-link">检索偏好</a>
+                <a href="userinfo.html" class="nav-link">个人信息</a>
+                <a href="tools.html" class="nav-link">工具集</a>
+                <button id="theme-toggle" class="theme-toggle">切换主题</button>
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <section class="profile-section">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img id="user-avatar" src="assets/icons/user-avatar.png" alt="用户头像" class="avatar">
+                        <button id="change-avatar" class="change-avatar-btn">更换头像</button>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="user-name">用户昵称</h2>
+                        <p id="user-email">user@example.com</p>
+                        <div class="user-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="knowledge-count">0</span>
+                                <span class="stat-label">知识条目</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="tools-count">0</span>
+                                <span class="stat-label">工具数量</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="files-count">0</span>
+                                <span class="stat-label">文件数量</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div class="quick-actions">
+                        <h3>快速操作</h3>
+                        <div class="actions-grid">
+                            <a href="knowledge.html" class="action-card">
+                                <div class="action-icon">🧠</div>
+                                <h4>管理知识</h4>
+                                <p>查看和编辑您的个性化知识库</p>
+                            </a>
+                            <a href="preferences.html" class="action-card">
+                                <div class="action-icon">🔍</div>
+                                <h4>设置偏好</h4>
+                                <p>配置您的检索网站偏好</p>
+                            </a>
+                            <a href="userinfo.html" class="action-card">
+                                <div class="action-icon">👤</div>
+                                <h4>个人信息</h4>
+                                <p>管理您的个人资料和文件</p>
+                            </a>
+                            <a href="tools.html" class="action-card">
+                                <div class="action-icon">🛠️</div>
+                                <h4>工具集</h4>
+                                <p>管理您的专属工具集</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>最近交互记录</h3>
+                        <div class="activity-list" id="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">💬</div>
+                                <div class="activity-content">
+                                    <h4>与AI助手对话</h4>
+                                    <p>询问关于JavaScript闭包的问题</p>
+                                    <span class="activity-time">2023-12-25 14:30</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">💾</div>
+                                <div class="activity-content">
+                                    <h4>保存知识条目</h4>
+                                    <p>添加了关于React Hooks的使用技巧</p>
+                                    <span class="activity-time">2023-12-24 16:45</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">⚙️</div>
+                                <div class="activity-content">
+                                    <h4>更新工具设置</h4>
+                                    <p>启用了代码格式化工具</p>
+                                    <span class="activity-time">2023-12-23 10:20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

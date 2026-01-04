@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识记忆管理 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>大模型助手</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="profile.html" class="nav-link">个人中心</a>
+                <a href="knowledge.html" class="nav-link active">知识记忆</a>
+                <a href="preferences.html" class="nav-link">检索偏好</a>
+                <a href="userinfo.html" class="nav-link">个人信息</a>
+                <a href="tools.html" class="nav-link">工具集</a>
+                <button id="theme-toggle" class="theme-toggle">切换主题</button>
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <section class="knowledge-section">
+                <div class="section-header">
+                    <h2>知识记忆管理</h2>
+                    <button id="add-knowledge-btn" class="btn btn-primary">添加知识条目</button>
+                </div>
+
+                <div class="knowledge-controls">
+                    <div class="search-filter">
+                        <input type="text" id="knowledge-search" placeholder="搜索知识条目..." class="search-input">
+                        <select id="knowledge-filter" class="filter-select">
+                            <option value="all">全部</option>
+                            <option value="important">重要</option>
+                            <option value="today">今天</option>
+                            <option value="week">本周</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="knowledge-list" id="knowledge-list">
+                    <div class="knowledge-item">
+                        <div class="knowledge-content">
+                            <h3>JavaScript闭包概念</h3>
+                            <p class="knowledge-question">什么是JavaScript闭包？</p>
+                            <p class="knowledge-answer">闭包是指一个函数能够访问并"记住"其外部作用域中的变量，即使在其外部函数已经返回之后。</p>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span class="knowledge-date">2023-12-25</span>
+                            <span class="knowledge-importance important">重要</span>
+                            <div class="knowledge-actions">
+                                <button class="action-btn edit-btn">编辑</button>
+                                <button class="action-btn delete-btn">删除</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="knowledge-content">
+                            <h3>React Hooks使用技巧</h3>
+                            <p class="knowledge-question">useEffect和useCallback的区别是什么？</p>
+                            <p class="knowledge-answer">useEffect用于处理副作用，而useCallback用于缓存函数，避免不必要的重新渲染。</p>
+                        </div>
+                        <div class="knowledge-meta">
+                            <span class="knowledge-date">2023-12-24</span>
+                            <span class="knowledge-importance normal">普通</span>
+                            <div class="knowledge-actions">
+                                <button class="action-btn edit-btn">编辑</button>
+                                <button class="action-btn delete-btn">删除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination" id="knowledge-pagination">
+                    <button class="page-btn" id="prev-page">上一页</button>
+                    <span class="page-info">1 / 1</span>
+                    <button class="page-btn" id="next-page">下一页</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- 添加/编辑知识条目的模态框 -->
+        <div id="knowledge-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="modal-title">添加知识条目</h3>
+                <form id="knowledge-form">
+                    <div class="input-group">
+                        <label for="knowledge-title">标题</label>
+                        <input type="text" id="knowledge-title" name="title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="knowledge-question">问题</label>
+                        <textarea id="knowledge-question" name="question" rows="3" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="knowledge-answer">答案</label>
+                        <textarea id="knowledge-answer" name="answer" rows="5" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="knowledge-importance">重要程度</label>
+                        <select id="knowledge-importance" name="importance">
+                            <option value="normal">普通</option>
+                            <option value="important">重要</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/knowledge.js"></script>
+</body>
+</html>
