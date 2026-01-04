@@ -1,0 +1,24 @@
+{
+  "name": "personalized-llm-assistant-portal",
+  "version": "1.0.0",
+  "description": "个性化大模型助手用户中心系统，支持用户个性化知识记忆、检索偏好管理、个人信息管理及专属工具集管理",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "llm",
+    "assistant",
+    "user-center",
+    "knowledge-management",
+    "personalization"
+  ],
+  "author": "AI Assistant Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "live-server": "^1.2.2"
+  }
+}
