@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form-container">
+            <div class="auth-tabs">
+                <button id="login-tab" class="tab-btn active" data-tab="login">登录</button>
+                <button id="register-tab" class="tab-btn" data-tab="register">注册</button>
+                <button id="email-tab" class="tab-btn" data-tab="email">邮箱验证</button>
+            </div>
+            
+            <form id="login-form" class="auth-form active">
+                <h2>用户登录</h2>
+                <div class="input-group">
+                    <label for="login-email">邮箱</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">登录</button>
+                <p class="auth-link">
+                    <a href="#" id="forgot-password">忘记密码？</a>
+                </p>
+            </form>
+            
+            <form id="register-form" class="auth-form">
+                <h2>用户注册</h2>
+                <div class="input-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-email">邮箱</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-confirm-password">确认密码</label>
+                    <input type="password" id="register-confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">注册</button>
+            </form>
+            
+            <form id="email-form" class="auth-form">
+                <h2>邮箱验证登录</h2>
+                <div class="input-group">
+                    <label for="email-login">邮箱</label>
+                    <input type="email" id="email-login" name="email" required>
+                </div>
+                <button type="button" class="btn btn-secondary" id="send-verification">发送验证码</button>
+                <div class="input-group">
+                    <label for="verification-code">验证码</label>
+                    <input type="text" id="verification-code" name="code" required>
+                </div>
+                <button type="submit" class="btn btn-primary">验证登录</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

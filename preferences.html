@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检索偏好设置 - 个性化大模型助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>大模型助手</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="profile.html" class="nav-link">个人中心</a>
+                <a href="knowledge.html" class="nav-link">知识记忆</a>
+                <a href="preferences.html" class="nav-link active">检索偏好</a>
+                <a href="userinfo.html" class="nav-link">个人信息</a>
+                <a href="tools.html" class="nav-link">工具集</a>
+                <button id="theme-toggle" class="theme-toggle">切换主题</button>
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <section class="preferences-section">
+                <div class="section-header">
+                    <h2>检索偏好设置</h2>
+                    <button id="add-site-btn" class="btn btn-primary">添加网站</button>
+                </div>
+
+                <div class="preferences-description">
+                    <p>设置您常用的检索网站，系统将根据优先级顺序进行检索。</p>
+                </div>
+
+                <div class="site-list" id="site-list">
+                    <div class="site-item">
+                        <div class="site-info">
+                            <h3>MDN Web Docs</h3>
+                            <p>https://developer.mozilla.org</p>
+                            <div class="site-priority">
+                                <label>优先级：</label>
+                                <select class="priority-select" data-id="1">
+                                    <option value="1" selected>1 (最高)</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 (最低)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="site-actions">
+                            <button class="action-btn edit-btn" data-id="1">编辑</button>
+                            <button class="action-btn delete-btn" data-id="1">删除</button>
+                        </div>
+                    </div>
+                    
+                    <div class="site-item">
+                        <div class="site-info">
+                            <h3>Stack Overflow</h3>
+                            <p>https://stackoverflow.com</p>
+                            <div class="site-priority">
+                                <label>优先级：</label>
+                                <select class="priority-select" data-id="2">
+                                    <option value="1">1 (最高)</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 (最低)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="site-actions">
+                            <button class="action-btn edit-btn" data-id="2">编辑</button>
+                            <button class="action-btn delete-btn" data-id="2">删除</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sync-section">
+                    <h3>同步设置</h3>
+                    <p>将您的检索偏好同步到大模型检索模块</p>
+                    <button id="sync-preferences" class="btn btn-secondary">一键同步</button>
+                    <div id="sync-status" class="sync-status"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 添加/编辑网站的模态框 -->
+        <div id="site-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="site-modal-title">添加网站</h3>
+                <form id="site-form">
+                    <div class="input-group">
+                        <label for="site-name">网站名称</label>
+                        <input type="text" id="site-name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="site-url">网站URL</label>
+                        <input type="url" id="site-url" name="url" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="site-description">描述</label>
+                        <textarea id="site-description" name="description" rows="2"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="site-priority">优先级</label>
+                        <select id="site-priority" name="priority">
+                            <option value="1">1 (最高)</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 (最低)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/preferences.js"></script>
+</body>
+</html>
