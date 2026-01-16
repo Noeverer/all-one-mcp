@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录跳转测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #log {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>登录跳转测试</h1>
+
+    <div class="test-section">
+        <h2>环境检查</h2>
+        <div id="env-check"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>测试步骤</h2>
+        <button onclick="clearLocalStorage()">清除所有数据</button>
+        <button onclick="createTestUser()">创建测试用户</button>
+        <button onclick="simulateLogin()">模拟登录</button>
+        <button onclick="checkLoginState()">检查登录状态</button>
+        <button onclick="testRedirect()">测试跳转</button>
+    </div>
+
+    <div class="test-section">
+        <h2>测试日志</h2>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const colorClass = type === 'pass' ? 'pass' : (type === 'fail' ? 'fail' : '');
+            logDiv.innerHTML += `<div class="${colorClass}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            log('LocalStorage 已清除');
+            checkEnv();
+        }
+
+        function createTestUser() {
+            const testUser = {
+                id: Date.now(),
+                email: 'test@example.com',
+                username: 'testuser',
+                password: 'password123',
+                nickname: 'testuser',
+                avatar: 'assets/icons/user-avatar.png',
+                joinDate: new Date().toISOString()
+            };
+
+            const users = [testUser];
+            localStorage.setItem('users', JSON.stringify(users));
+            log('测试用户已创建: test@example.com / password123', 'pass');
+        }
+
+        function simulateLogin() {
+            // 模拟 auth.js 中的登录逻辑
+            const email = 'test@example.com';
+            const password = 'password123';
+
+            log('模拟登录: ' + email);
+
+            // 验证用户
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email);
+
+            if (!user) {
+                log('用户不存在', 'fail');
+                return;
+            }
+
+            if (user.password !== password) {
+                log('密码错误', 'fail');
+                return;
+            }
+
+            // 登录成功，设置认证信息
+            localStorage.setItem('authToken', 'mock-token-' + Date.now());
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            log('登录成功', 'pass');
+            log('authToken: ' + localStorage.getItem('authToken').substring(0, 20) + '...');
+            log('currentUser: ' + localStorage.getItem('currentUser').substring(0, 50) + '...');
+        }
+
+        function checkLoginState() {
+            const token = localStorage.getItem('authToken');
+            const userStr = localStorage.getItem('currentUser');
+            const user = userStr ? JSON.parse(userStr) : null;
+
+            log('=== 登录状态检查 ===');
+            log('Token存在: ' + (token ? '是' : '否'), token ? 'pass' : 'fail');
+            log('User存在: ' + (user ? '是' : '否'), user ? 'pass' : 'fail');
+
+            if (user) {
+                log('用户邮箱: ' + user.email);
+                log('用户昵称: ' + user.nickname);
+            }
+        }
+
+        function testRedirect() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                log('无法跳转：未登录', 'fail');
+                return;
+            }
+
+            log('=== 跳转测试 ===');
+            log('检查跳转逻辑...');
+
+            // 模拟 auth.js 中的跳转代码
+            log('setTimeout(() => {');
+            log('  window.location.href = "index.html";');
+            log('}, 1000);');
+
+            log('等待 1 秒后跳转到 index.html...');
+            log('注意：在实际的 login.html 中，这个跳转会自动发生', 'pass');
+
+            // 询问用户是否真的要跳转
+            const confirmJump = confirm('是否真的跳转到 index.html？\n\n点击确定将跳转，点击取消仅演示逻辑');
+            if (confirmJump) {
+                setTimeout(() => {
+                    log('正在跳转...', 'pass');
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                log('跳转已取消（仅演示）');
+            }
+        }
+
+        function checkEnv() {
+            const envDiv = document.getElementById('env-check');
+            const token = localStorage.getItem('authToken');
+            const users = localStorage.getItem('users');
+            const currentUser = localStorage.getItem('currentUser');
+
+            envDiv.innerHTML = `
+                <p>LocalStorage 状态:</p>
+                <ul>
+                    <li>authToken: ${token ? '<span class="pass">存在</span>' : '<span class="fail">不存在</span>'}</li>
+                    <li>users: ${users ? '<span class="pass">存在</span>' : '<span class="fail">不存在</span>'}</li>
+                    <li>currentUser: ${currentUser ? '<span class="pass">存在</span>' : '<span class="fail">不存在</span>'}</li>
+                </ul>
+            `;
+        }
+
+        // 初始化
+        checkEnv();
+        log('测试页面已加载');
+        log('请按顺序执行：1.清除数据 → 2.创建测试用户 → 3.模拟登录 → 4.检查状态 → 5.测试跳转');
+    </script>
+</body>
+</html>

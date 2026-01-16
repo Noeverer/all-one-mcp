@@ -104,11 +104,37 @@ php -S localhost:8000
 │   └── 007-修复注册登录跳转和邮箱验证问题/
 ├── assets/
 │   └── icons/         # 图标资源
+├── 03-wikijs/         # Wiki.js 在线笔记系统
+│   ├── docker-compose.yml
+│   ├── config.yml
+│   ├── start.sh
+│   ├── README.md
+│   └── QUICKSTART.md
 ├── start.sh           # Linux/Mac 一键启动脚本
 ├── start.bat          # Windows 一键启动脚本
 ├── DEVELOPMENT.md     # 开发和调试指南
+├── DEPLOYMENT.md      # 部署指南
 └── README.md          # 项目说明
 ```
+
+## 子项目
+
+### Wiki.js 在线笔记系统
+
+完整功能的在线笔记部署方案,支持:
+- 📝 随时随地访问和编辑笔记
+- 🔗 自动化 Git 仓库同步(GitHub/GitLab)
+- 👥 多人协作编辑
+- ⚡ 性能优化(适配中等性能机器)
+- 📊 丰富的编辑器和插件支持
+
+快速开始:
+```bash
+cd 03-wikijs
+./start.sh
+```
+
+详细文档: [Wiki.js 部署指南](./03-wikijs/README.md)
 
 ## 功能模块
 

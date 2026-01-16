@@ -1,0 +1,112 @@
+# Wiki.js 配置文件
+# 复制此文件为 config.yml 并根据需要修改
+# 首次启动后,大部分配置可以在管理界面中完成
+
+# =====================================
+# 数据库配置
+# =====================================
+database:
+  type: postgres
+  host: db
+  port: 5432
+  user: wikijs
+  pass: wikijsrocks
+  db: wiki
+  ssl: false
+
+# =====================================
+# Redis 缓存配置
+# =====================================
+redis:
+  enabled: true
+  host: redis
+  port: 6379
+  password: ''
+  db: 0
+
+# =====================================
+# 性能优化配置 (适配中等性能机器)
+# =====================================
+performance:
+  # 最大并发连接数
+  maxConcurrentConnections: 20
+  # 最大文件上传大小 (MB)
+  maxUploadSize: 10
+  # 页面缓存时间 (秒)
+  pageCacheTTL: 600
+  # 启用响应压缩
+  gzip: true
+
+# =====================================
+# 日志配置
+# =====================================
+logLevel: info
+logFormat: json
+
+# =====================================
+# 端口配置
+# =====================================
+port: 3000
+bindIP: '0.0.0.0'
+
+# =====================================
+# 安全配置
+# =====================================
+security:
+  # CORS 配置
+  cors:
+    enabled: true
+    origin: '*'
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+    credentials: true
+  # Rate limiting
+  rateLimit:
+    enabled: true
+    duration: 60
+    max: 100
+
+# =====================================
+# Git 仓库同步配置
+# =====================================
+git:
+  # 默认 Git 远程仓库 (可在界面中配置)
+  url: ''
+  branch: main
+  authType: ''
+  privateKeyPath: ''
+  email: ''
+  username: ''
+  # 同步间隔 (分钟)
+  syncInterval: 30
+  # 自动拉取
+  autoFetch: true
+  # 自动推送
+  autoPush: true
+
+# =====================================
+# 编辑器配置
+# =====================================
+editor:
+  defaultEditor: markdown
+  features:
+    lineNumbers: true
+    lineWrapping: true
+    spellcheck: true
+
+# =====================================
+# 多语言配置
+# =====================================
+lang: zh-CN
+
+# =====================================
+# 时区配置
+# =====================================
+timezone: Asia/Shanghai
+
+# =====================================
+# SEO 配置
+# =====================================
+seo:
+  title: 我的笔记
+  description: 个人知识库与笔记管理
+  robots: true
