@@ -12,6 +12,7 @@
 - 暗黑/明亮模式切换
 - 响应式设计
 
+<<<<<<< HEAD
 ## 快速开始
 
 ### 方式一：使用一键脚本（推荐）
@@ -68,6 +69,8 @@ php -S localhost:8000
 - 性能优化
 - 测试方法
 
+=======
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
 ## 技术栈
 
 - HTML5
@@ -94,6 +97,7 @@ php -S localhost:8000
 │   ├── userinfo.js     # 用户信息
 │   ├── tools.js        # 工具管理
 │   └── main.js         # 主应用逻辑
+<<<<<<< HEAD
 ├── specs/             # 功能规格文档
 │   ├── 001-user-authentication-system/
 │   ├── 002-knowledge-pair-management/
@@ -189,3 +193,8 @@ cd 03-wikijs
 ## 许可证
 
 MIT License
+=======
+└── assets/
+    └── icons/          # 图标资源
+```
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540

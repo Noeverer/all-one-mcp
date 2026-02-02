@@ -80,6 +80,7 @@ class Auth {
         document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
     }
 
+<<<<<<< HEAD
     // 验证登录凭据
     verifyLoginCredentials(email, password) {
         const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -142,6 +143,8 @@ class Auth {
         return { success: true };
     }
 
+=======
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
     async handleLogin() {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
@@ -157,6 +160,7 @@ class Auth {
             return;
         }
 
+<<<<<<< HEAD
         // 验证登录凭据
         const result = this.verifyLoginCredentials(email, password);
         
@@ -176,6 +180,33 @@ class Auth {
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 1000);
+=======
+        // 模拟登录请求
+        try {
+            // 这里应该是实际的API调用
+            // 模拟登录成功
+            const user = {
+                id: Date.now(),
+                email: email,
+                nickname: email.split('@')[0],
+                avatar: 'assets/icons/user-avatar.png',
+                joinDate: new Date().toISOString()
+            };
+
+            // 保存认证信息
+            localStorage.setItem('authToken', 'mock-token-' + Date.now());
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            app.showMessage('登录成功', 'success');
+            
+            // 延迟跳转以显示消息
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        } catch (error) {
+            app.showMessage('登录失败，请检查邮箱和密码', 'error');
+        }
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
     }
 
     async handleRegister() {
@@ -254,6 +285,7 @@ class Auth {
             return;
         }
 
+<<<<<<< HEAD
         // 验证验证码
         const verifyResult = this.verifyCode(email, code);
         
@@ -285,17 +317,39 @@ class Auth {
             } else {
                 app.showMessage('登录成功', 'success');
             }
+=======
+        // 模拟邮箱验证登录
+        try {
+            // 这里应该是实际的API调用
+            // 模拟登录成功
+            const user = {
+                id: Date.now(),
+                email: email,
+                nickname: email.split('@')[0],
+                avatar: 'assets/icons/user-avatar.png',
+                joinDate: new Date().toISOString()
+            };
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
 
             // 保存认证信息
             localStorage.setItem('authToken', 'mock-token-' + Date.now());
             localStorage.setItem('currentUser', JSON.stringify(user));
 
+<<<<<<< HEAD
+=======
+            app.showMessage('登录成功', 'success');
+            
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
             // 延迟跳转以显示消息
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 1000);
         } catch (error) {
+<<<<<<< HEAD
             app.showMessage('登录失败，请重试', 'error');
+=======
+            app.showMessage('验证码错误或已过期', 'error');
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
         }
     }
 
@@ -312,11 +366,19 @@ class Auth {
             return;
         }
 
+<<<<<<< HEAD
         // 生成并存储验证码
         try {
             this.generateVerificationCode(email);
             
             app.showMessage(`验证码已发送到 ${email}（请查看控制台）`, 'success');
+=======
+        // 模拟发送验证码
+        try {
+            // 这里应该是实际的API调用
+            // 模拟发送成功
+            app.showMessage('验证码已发送，请查收邮件', 'success');
+>>>>>>> f65e0b29fd179607f2011c7093173c7245d36540
 
             // 模拟倒计时
             const btn = document.getElementById('send-verification');
