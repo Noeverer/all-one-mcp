@@ -80,6 +80,68 @@ class Auth {
         document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
     }
 
+    // 验证登录凭据
+    verifyLoginCredentials(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(u => u.email === email);
+        
+        if (!user) {
+            return { success: false, message: '该邮箱未注册' };
+        }
+        
+        if (user.password !== password) {
+            return { success: false, message: '密码错误' };
+        }
+        
+        return { success: true, user };
+    }
+
+    // 生成验证码
+    generateVerificationCode(email) {
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        const expiration = Date.now() + 5 * 60 * 1000; // 5分钟过期
+        
+        const codes = JSON.parse(localStorage.getItem('verificationCodes') || '{}');
+        codes[email] = {
+            code,
+            expiration,
+            createdAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('verificationCodes', JSON.stringify(codes));
+        
+        // 控制台打印验证码（用于测试）
+        console.log(`验证码 for ${email}: ${code}`);
+        
+        return code;
+    }
+
+    // 验证验证码
+    verifyCode(email, inputCode) {
+        const codes = JSON.parse(localStorage.getItem('verificationCodes') || '{}');
+        const storedCode = codes[email];
+        
+        if (!storedCode) {
+            return { success: false, message: '请先发送验证码' };
+        }
+        
+        if (Date.now() > storedCode.expiration) {
+            delete codes[email];
+            localStorage.setItem('verificationCodes', JSON.stringify(codes));
+            return { success: false, message: '验证码已过期' };
+        }
+        
+        if (storedCode.code !== inputCode) {
+            return { success: false, message: '验证码错误' };
+        }
+        
+        // 验证成功后删除验证码
+        delete codes[email];
+        localStorage.setItem('verificationCodes', JSON.stringify(codes));
+        
+        return { success: true };
+    }
+
     async handleLogin() {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
@@ -95,31 +157,25 @@ class Auth {
             return;
         }
 
-        // 模拟登录请求
-        try {
-            // 这里应该是实际的API调用
-            // 模拟登录成功
-            const user = {
-                id: Date.now(),
-                email: email,
-                nickname: email.split('@')[0],
-                avatar: 'assets/icons/user-avatar.png',
-                joinDate: new Date().toISOString()
-            };
-
-            // 保存认证信息
-            localStorage.setItem('authToken', 'mock-token-' + Date.now());
-            localStorage.setItem('currentUser', JSON.stringify(user));
-
-            app.showMessage('登录成功', 'success');
-            
-            // 延迟跳转以显示消息
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
-        } catch (error) {
-            app.showMessage('登录失败，请检查邮箱和密码', 'error');
+        // 验证登录凭据
+        const result = this.verifyLoginCredentials(email, password);
+        
+        if (!result.success) {
+            app.showMessage(result.message, 'error');
+            return;
         }
+
+        // 登录成功
+        const user = result.user;
+        localStorage.setItem('authToken', 'mock-token-' + Date.now());
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        app.showMessage('登录成功', 'success');
+        
+        // 延迟跳转以显示消息
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
     }
 
     async handleRegister() {
@@ -198,30 +254,48 @@ class Auth {
             return;
         }
 
-        // 模拟邮箱验证登录
+        // 验证验证码
+        const verifyResult = this.verifyCode(email, code);
+        
+        if (!verifyResult.success) {
+            app.showMessage(verifyResult.message, 'error');
+            return;
+        }
+
+        // 验证码验证成功，检查用户是否已注册
         try {
-            // 这里应该是实际的API调用
-            // 模拟登录成功
-            const user = {
-                id: Date.now(),
-                email: email,
-                nickname: email.split('@')[0],
-                avatar: 'assets/icons/user-avatar.png',
-                joinDate: new Date().toISOString()
-            };
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            let user = users.find(u => u.email === email);
+
+            if (!user) {
+                // 用户不存在，自动注册
+                user = {
+                    id: Date.now(),
+                    email: email,
+                    username: email.split('@')[0],
+                    password: '', // 邮箱验证登录没有密码
+                    nickname: email.split('@')[0],
+                    avatar: 'assets/icons/user-avatar.png',
+                    joinDate: new Date().toISOString()
+                };
+
+                users.push(user);
+                localStorage.setItem('users', JSON.stringify(users));
+                app.showMessage('注册并登录成功', 'success');
+            } else {
+                app.showMessage('登录成功', 'success');
+            }
 
             // 保存认证信息
             localStorage.setItem('authToken', 'mock-token-' + Date.now());
             localStorage.setItem('currentUser', JSON.stringify(user));
 
-            app.showMessage('登录成功', 'success');
-            
             // 延迟跳转以显示消息
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 1000);
         } catch (error) {
-            app.showMessage('验证码错误或已过期', 'error');
+            app.showMessage('登录失败，请重试', 'error');
         }
     }
 
@@ -238,11 +312,11 @@ class Auth {
             return;
         }
 
-        // 模拟发送验证码
+        // 生成并存储验证码
         try {
-            // 这里应该是实际的API调用
-            // 模拟发送成功
-            app.showMessage('验证码已发送，请查收邮件', 'success');
+            this.generateVerificationCode(email);
+            
+            app.showMessage(`验证码已发送到 ${email}（请查看控制台）`, 'success');
 
             // 模拟倒计时
             const btn = document.getElementById('send-verification');
